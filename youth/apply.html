@@ -1,0 +1,37 @@
+---
+layout: default
+title: Apliko — CCST Networking për të rinj
+---
+
+<h1>Apliko për kohortën (30 vende · 100 EUR)</h1>
+<p>Plotëso formularin. Nëse je nën 18 vjeç, do të duhet pëlqimi i prindit/kujdestarit.</p>
+
+<!-- TODO: Set your real form endpoint (Tally/Typeform/Google Forms/whatever) in the action attribute below. -->
+<form id="apply-form" action="https://example.com/your-form-endpoint" method="post">
+  <label>Emri dhe mbiemri<br>
+    <input type="text" name="full_name" placeholder="Emri dhe mbiemri" required>
+  </label><br><br>
+  <label>Email<br>
+    <input type="email" name="email" placeholder="email@example.com" required>
+  </label><br><br>
+  <label>Telefon<br>
+    <input type="tel" name="phone" placeholder="+3556xxxxxxx" required>
+  </label><br><br>
+
+  <!-- Fusha e fshehtë për referrer (mbushet automatikisht nga referral.js) -->
+  <input type="hidden" id="referrer" name="referrer" value="">
+
+  <label>
+    <input type="checkbox" name="is_minor">
+    Jam nën 18 vjeç (do të plotësoj <a href="./consent-parent.md" target="_blank">pëlqimin prindëror</a>)
+  </label><br><br>
+
+  <button type="submit">Apliko</button>
+</form>
+
+<p>
+  <!-- TODO: Replace with your payment link/button (Stripe/PayPal/bank transfer instructions). -->
+  Pas aplikimit, mund të vazhdosh me pagesën: <a href="#" onclick="alert('Vendos këtu linkun real të pagesës (Stripe/PayPal).'); return false;">Paguaj 100 EUR</a>
+</p>
+
+<script src="/assets/js/referral.js"></script>
