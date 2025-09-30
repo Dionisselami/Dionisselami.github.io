@@ -2,7 +2,7 @@
 <html lang="sq">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>S.R.S Ashensorë | Zgjidhje Premium për Lëvizjen Vertikale</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -34,6 +34,11 @@
             overflow: hidden; /* Kritike për lëvizjen me faqe */
             margin: 0;
             padding: 0;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            touch-action: none; /* Disable default touch behaviors */
+            -webkit-overflow-scrolling: touch;
         }
         .door {
             position: fixed;
@@ -78,6 +83,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: -webkit-fill-available; /* iOS Safari fix */
+        }
+        
+        /* Mobile-specific optimizations */
+        @media (max-width: 768px) {
+            section {
+                padding: 2rem 0;
+            }
+            
+            .container {
+                padding-left: 1.5rem !important;
+                padding-right: 1.5rem !important;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2 {
+                font-size: 1.875rem !important;
+            }
+            
+            .grid {
+                gap: 1.5rem !important;
+            }
         }
     </style>
 </head>
@@ -301,10 +332,11 @@
             Observer.create({
                 target: window,
                 type: "wheel,touch,pointer",
-                onDown: () => goToSection(activeIndex + 1), // Lëvizja poshtë aktivizon seksionin tjetër
-                onUp: () => goToSection(activeIndex - 1),   // Lëvizja lart aktivizon seksionin e mëparshëm
-                tolerance: 10,
-                preventDefault: true
+                onDown: () => goToSection(activeIndex - 1), // Scroll/swipe down = go to previous section (scroll content up)
+                onUp: () => goToSection(activeIndex + 1),   // Scroll/swipe up = go to next section (scroll content down)
+                tolerance: 50, // Increased tolerance for better mobile experience
+                preventDefault: true,
+                wheelSpeed: -1 // Ensure correct wheel direction
             });
             
             // --- NGARKIMI FILLESTAR I FAQES ---
@@ -320,6 +352,28 @@
                     { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.15, delay: 1 }
                 );
             }
+
+            // --- MENAXHIMI I NDRYSHIMIT TË MADHËSISË SË DRITARES ---
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    // Update position on resize to maintain correct section view
+                    gsap.set('#master-wrapper', { y: -activeIndex * window.innerHeight });
+                }, 250);
+            });
+
+            // --- FIX PËR iOS SAFARI (100vh issue) ---
+            function setViewportHeight() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            setViewportHeight();
+            window.addEventListener('resize', setViewportHeight);
+            window.addEventListener('orientationchange', () => {
+                setTimeout(setViewportHeight, 100);
+            });
 
             initialize();
         });
