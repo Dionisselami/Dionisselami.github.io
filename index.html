@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.R.S Ashensorë | Zgjidhje Premium për Lëvizjen Vertikale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Observer.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'srs-navy': '#0A192F',
+                        'srs-light-navy': '#112240',
+                        'srs-cyan': '#64FFDA',
+                        'srs-slate': '#8892B0',
+                        'srs-light-slate': '#CCD6F6',
+                        'srs-white': '#E6F1FF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        body, html {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0A192F;
+            color: #8892B0;
+            overflow: hidden; /* Kritike për lëvizjen me faqe */
+            margin: 0;
+            padding: 0;
+        }
+        .door {
+            position: fixed;
+            top: 0;
+            width: 50vw;
+            height: 100vh;
+            background-image: linear-gradient(145deg, #333 0%, #1a1a1a 50%, #333 100%);
+            z-index: 1000;
+            transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+        .left-door { left: 0; }
+        .right-door { right: 0; }
+        .doors-open .left-door { transform: translateX(-100%); }
+        .doors-open .right-door { transform: translateX(100%); }
+        .elevator-btn {
+            transition: all 0.3s ease;
+            border: 1px solid #64FFDA;
+            color: #64FFDA;
+        }
+        .elevator-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+        }
+        .elevator-btn.primary {
+            background-color: #64FFDA;
+            color: #0A192F;
+        }
+        .elevator-btn.primary:hover {
+            background-color: #64FFDA;
+            filter: brightness(1.1);
+        }
+        .scroll-indicator { animation: bounce 2s infinite; }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-srs-navy">
+    <!-- Mbështjellësi për të gjitha seksionet -->
+    <div id="master-wrapper">
+
+        <!-- ================================================== -->
+        <!-- SEKSIONI KRYESOR (Faqja 1) -->
+        <!-- ================================================== -->
+        <section class="relative overflow-hidden">
+            <div class="container mx-auto px-6 text-center">
+                
+                <!-- Titulli Kryesor -->
+                <h1 class="text-5xl md:text-7xl font-bold text-srs-white mb-6">S.R.S Ashensorë</h1>
+                
+                <!-- Nëntitulli (Motoja) -->
+                <p class="text-xl md:text-2xl text-srs-cyan mb-12 max-w-3xl mx-auto">Duke Përcaktuar Artin e Lëvizjes Vertikale</p>
+                
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <!-- Teksti i Butonit Primar -->
+                    <button class="elevator-btn primary px-8 py-4 rounded-md text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Zgjidhjet Tona</button>
+                    <!-- Teksti i Butonit Sekondar -->
+                    <button class="elevator-btn px-8 py-4 rounded-md text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Kërko një Kuotë</button>
+                </div>
+                
+                <div class="mt-24 scroll-indicator">
+                    <i data-feather="chevron-down" class="text-srs-cyan w-10 h-10 mx-auto"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================== -->
+        <!-- SEKSIONI I MODELEVE (Faqja 2) -->
+        <!-- ================================================== -->
+        <section id="models" class="bg-srs-light-navy">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <!-- Titulli i Seksionit -->
+                    <h2 class="text-4xl font-bold text-srs-white mb-4">Koleksioni Ynë <span class="text-srs-cyan">Signature</span></h2>
+                    <!-- Nëntitulli i Seksionit -->
+                    <p class="text-xl text-srs-slate max-w-2xl mx-auto">Projektuar për performancë, dizenjuar për elegancë dhe ndërtuar për një jetë.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Karta 1 -->
+                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
+                        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1593011372393-5969399676b4?q=80&w=2070&auto=format&fit=crop" alt="Ashensor Premium" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
+                        <div class="p-6">
+                            <!-- Titulli i Kartës 1 -->
+                            <h3 class="text-2xl font-bold text-srs-white mb-2">SkyLux Pro</h3>
+                            <!-- Përshkrimi i Kartës 1 -->
+                            <p class="text-srs-slate mb-4">Pamje panoramike dhe kontroll destinacioni me AI për një eksperiencë luksoze supreme.</p>
+                            <!-- Etiketa e Kartës 1 -->
+                            <span class="bg-srs-light-navy text-srs-cyan text-sm font-medium px-3 py-1 rounded-full">Premium</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Karta 2 -->
+                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
+                        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1616594418228-56582411b332?q=80&w=1974&auto=format&fit=crop" alt="Ashensor Rezidencial" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
+                        <div class="p-6">
+                            <!-- Titulli i Kartës 2 -->
+                            <h3 class="text-2xl font-bold text-srs-white mb-2">HomeGlide</h3>
+                            <!-- Përshkrimi i Kartës 2 -->
+                            <p class="text-srs-slate mb-4">Një zgjidhje kompakte dhe e personalizueshme që sjell elegancë moderne dhe aksesueshmëri në çdo shtëpi.</p>
+                            <!-- Etiketa e Kartës 2 -->
+                            <span class="bg-srs-light-navy text-srs-cyan text-sm font-medium px-3 py-1 rounded-full">Rezidencial</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Karta 3 -->
+                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
+                        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1560185012-34f4b46a0b9a?q=80&w=2070&auto=format&fit=crop" alt="Ashensor Komercial" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
+                        <div class="p-6">
+                            <!-- Titulli i Kartës 3 -->
+                            <h3 class="text-2xl font-bold text-srs-white mb-2">TitanFlow</h3>
+                            <!-- Përshkrimi i Kartës 3 -->
+                            <p class="text-srs-slate mb-4">Zgjidhje me kapacitet të lartë dhe shpejtësi të madhe për ndërtesa komerciale me menaxhim inteligjent të trafikut.</p>
+                            <!-- Etiketa e Kartës 3 -->
+                            <span class="bg-srs-light-navy text-srs-cyan text-sm font-medium px-3 py-1 rounded-full">Komercial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================== -->
+        <!-- SEKSIONI I SIGURISË (Faqja 3) -->
+        <!-- ================================================== -->
+        <section class="bg-srs-navy">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <!-- Titulli i Seksionit -->
+                    <h2 class="text-4xl font-bold text-srs-white mb-4">Projektuar për <span class="text-srs-cyan">Siguri pa Kompromis</span></h2>
+                    <!-- Nëntitulli i Seksionit -->
+                    <p class="text-xl text-srs-slate max-w-2xl mx-auto">Angazhimi ynë për sigurinë tuaj është i integruar në çdo sistem që ne projektojmë.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Veçoria 1 -->
+                    <div class="p-8">
+                        <div class="w-20 h-20 bg-srs-light-navy rounded-full flex items-center justify-center mx-auto mb-6"><i data-feather="shield" class="text-srs-cyan w-10 h-10"></i></div>
+                        <!-- Titulli i Veçorisë 1 -->
+                        <h3 class="text-xl font-bold text-srs-white mb-3">Frenim Rezervë</h3>
+                        <!-- Përshkrimi i Veçorisë 1 -->
+                        <p class="text-srs-slate">Frena elektromagnetike të avancuara aktivizohen menjëherë në çdo skenar mbingarkese.</p>
+                    </div>
+                    <!-- Veçoria 2 -->
+                    <div class="p-8">
+                        <div class="w-20 h-20 bg-srs-light-navy rounded-full flex items-center justify-center mx-auto mb-6"><i data-feather="activity" class="text-srs-cyan w-10 h-10"></i></div>
+                        <!-- Titulli i Veçorisë 2 -->
+                        <h3 class="text-xl font-bold text-srs-white mb-3">Monitorim në Distancë 24/7</h3>
+                        <!-- Përshkrimi i Veçorisë 2 -->
+                        <p class="text-srs-slate">Sistemet tona raportojnë diagnostikime në kohë reale për mirëmbajtje proaktive dhe performancë maksimale.</p>
+                    </div>
+                    <!-- Veçoria 3 -->
+                    <div class="p-8">
+                        <div class="w-20 h-20 bg-srs-light-navy rounded-full flex items-center justify-center mx-auto mb-6"><i data-feather="battery-charging" class="text-srs-cyan w-10 h-10"></i></div>
+                        <!-- Titulli i Veçorisë 3 -->
+                        <h3 class="text-xl font-bold text-srs-white mb-3">Furnizim Emergjence</h3>
+                        <!-- Përshkrimi i Veçorisë 3 -->
+                        <p class="text-srs-slate">Transferimi automatik në furnizim rezervë siguron funksionim të sigurt dhe të vazhdueshëm gjatë ndërprerjeve të energjisë.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================== -->
+        <!-- SEKSIONI I KONTAKTIT (Faqja 4) -->
+        <!-- ================================================== -->
+        <section id="contact" class="bg-srs-light-navy">
+            <div class="container mx-auto px-6 text-center">
+                <!-- Titulli i Seksionit -->
+                <h2 class="text-4xl font-bold text-srs-white mb-4">Filloni Ngjitjen Tuaj</h2>
+                <!-- Nëntitulli i Seksionit -->
+                <p class="text-xl text-srs-cyan mb-8 max-w-2xl mx-auto">Gati për të ngritur në nivel projektin tuaj të ardhshëm? Kontaktoni ekipin tonë të ekspertëve për një konsultim të personalizuar.</p>
+                <!-- Teksti i Butonit -->
+                <button class="elevator-btn primary px-12 py-4 rounded-md text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Na Kontaktoni</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dyert dhe Treguesi i Kateve - Nuk ka tekst për të modifikuar këtu -->
+    <div class="door left-door"></div>
+    <div class="door right-door"></div>
+    <div id="floor-indicator" class="fixed top-1/2 -translate-y-1/2 right-4 md:right-8 flex flex-col items-center z-40 space-y-4">
+        <button class="floor-indicator w-3 h-3 rounded-full bg-srs-slate transition-all duration-300 hover:bg-srs-cyan"></button>
+        <button class="floor-indicator w-3 h-3 rounded-full bg-srs-slate transition-all duration-300 hover:bg-srs-cyan"></button>
+        <button class="floor-indicator w-3 h-3 rounded-full bg-srs-slate transition-all duration-300 hover:bg-srs-cyan"></button>
+        <button class="floor-indicator w-3 h-3 rounded-full bg-srs-slate transition-all duration-300 hover:bg-srs-cyan"></button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Observer);
+
+            const sections = gsap.utils.toArray('section');
+            const floorButtons = gsap.utils.toArray('.floor-indicator');
+            let activeIndex = 0;
+            let isAnimating = false;
+
+            // --- KONTROLLET E DYERVE ---
+            const openDoors = () => document.body.classList.add('doors-open');
+            const closeDoors = () => document.body.classList.remove('doors-open');
+
+            // --- BËRTHAMA E ANIMACIONIT DHE NAVIGIMIT ---
+            function goToSection(index) {
+                index = gsap.utils.clamp(0, sections.length - 1, index); // Sigurohu që indeksi është brenda kufijve
+
+                if (activeIndex === index || isAnimating) return;
+
+                isAnimating = true;
+                activeIndex = index;
+                updateActiveFloor(activeIndex);
+                closeDoors();
+
+                gsap.to('#master-wrapper', {
+                    y: -index * window.innerHeight,
+                    duration: 1.5,
+                    ease: 'power3.inOut',
+                    onComplete: () => {
+                        openDoors();
+                        setTimeout(() => isAnimating = false, 300); // Pauzë për të parandaluar ri-aktivizimin e shpejtë
+                    }
+                });
+                
+                // Animimi i përmbajtjes së seksionit që mbërrin
+                const elements = sections[index].querySelectorAll("h1, h2, p, .grid, button");
+                gsap.fromTo(elements, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8, 
+                        ease: "power3.out", 
+                        stagger: 0.15,
+                        delay: 1.2 // Fillo animacionin pasi dyert janë pothuajse të mbyllura
+                    }
+                );
+            }
+
+            // --- TREGUESI I KATEVE ---
+            function updateActiveFloor(index) {
+                floorButtons.forEach((button, i) => {
+                    button.classList.toggle('bg-srs-cyan', i === index);
+                    button.classList.toggle('scale-150', i === index);
+                    button.classList.toggle('bg-srs-slate', i !== index);
+                });
+            }
+
+            floorButtons.forEach((btn, index) => {
+                btn.addEventListener("click", () => goToSection(index));
+            });
+
+            // --- VËZHGUESI PËR LËVIZJE ME RROTË/PREKJE ---
+            // Kjo krijon efektin e "lëvizjes me faqe"
+            Observer.create({
+                target: window,
+                type: "wheel,touch,pointer",
+                onDown: () => goToSection(activeIndex + 1), // Lëvizja poshtë aktivizon seksionin tjetër
+                onUp: () => goToSection(activeIndex - 1),   // Lëvizja lart aktivizon seksionin e mëparshëm
+                tolerance: 10,
+                preventDefault: true
+            });
+            
+            // --- NGARKIMI FILLESTAR I FAQES ---
+            function initialize() {
+                gsap.set('#master-wrapper', { y: 0 });
+                updateActiveFloor(0);
+                setTimeout(openDoors, 500); // Animacioni fillestar i hapjes së dyerve
+                
+                // Animimi i përmbajtjes së seksionit të parë gjatë ngarkimit
+                const elements = sections[0].querySelectorAll("h1, h2, p, .grid, button");
+                gsap.fromTo(elements, 
+                    { opacity: 0, y: 50 }, 
+                    { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.15, delay: 1 }
+                );
+            }
+
+            initialize();
+        });
+    </script>
+</body>
+</html>
