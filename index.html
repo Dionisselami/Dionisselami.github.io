@@ -73,108 +73,38 @@
             60% {transform: translateY(-10px);}
         }
         section {
-            min-height: 100vh;
+            height: 100vh;
             width: 100vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem 1rem;
-        }
-        
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            section {
-                min-height: 100vh;
-                padding: 3rem 1rem;
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-            
-            #master-wrapper {
-                height: 100vh;
-                overflow-y: auto;
-                overflow-x: hidden;
-                scroll-snap-type: y mandatory;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            section {
-                scroll-snap-align: start;
-                scroll-snap-stop: always;
-            }
-            
-            .grid {
-                gap: 2rem !important;
-            }
-            
-            /* Add more spacing for mobile cards */
-            .bg-srs-navy.rounded-lg {
-                margin-bottom: 1.5rem;
-            }
-            
-            /* Ensure content doesn't get cut off */
-            .container {
-                max-height: none;
-            }
-        }
-        
-        /* Improve scrolling on mobile */
-        @media (max-width: 768px) {
-            body {
-                overflow: auto;
-            }
-            
-            #master-wrapper {
-                overflow-y: scroll;
-                scroll-behavior: smooth;
-            }
+            padding: 0 1rem;
         }
     </style>
 </head>
 <body class="bg-srs-navy">
-    <!-- Mbështjellësi për të gjitha seksionet -->
     <div id="master-wrapper">
-
-        <!-- ================================================== -->
-        <!-- SEKSIONI KRYESOR (Faqja 1) -->
-        <!-- ================================================== -->
         <section class="relative overflow-hidden">
             <div class="container mx-auto px-4 text-center">
-                
-                <!-- Titulli Kryesor -->
                 <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-srs-white mb-4">S.R.S Ashensorë</h1>
-                
-                <!-- Nëntitulli (Motoja) -->
                 <p class="text-lg sm:text-xl lg:text-2xl text-srs-cyan mb-10 max-w-3xl mx-auto">Duke Përcaktuar Artin e Lëvizjes Vertikale</p>
-                
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <!-- Teksti i Butonit Primar -->
                     <button class="elevator-btn primary px-6 py-3 sm:px-8 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Zgjidhjet Tona</button>
-                    <!-- Teksti i Butonit Sekondar -->
                     <button class="elevator-btn px-6 py-3 sm:px-8 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Kërko një Kuotë</button>
                 </div>
-                
                 <div class="mt-16 scroll-indicator">
                     <i data-feather="chevron-down" class="text-srs-cyan w-10 h-10 mx-auto"></i>
                 </div>
             </div>
         </section>
 
-        <!-- ================================================== -->
-        <!-- SEKSIONI I MODELEVE (Faqja 2) -->
-        <!-- ================================================== -->
         <section id="models" class="bg-srs-light-navy">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-8 md:mb-12">
-                    <!-- Titulli i Seksionit -->
                     <h2 class="text-3xl sm:text-4xl font-bold text-srs-white mb-3">Koleksioni Ynë <span class="text-srs-cyan">Signature</span></h2>
-                    <!-- Nëntitulli i Seksionit -->
                     <p class="text-base sm:text-lg text-srs-slate max-w-2xl mx-auto">Projektuar për performancë, dizenjuar për elegancë dhe ndërtuar për një jetë.</p>
                 </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <!-- Karta 1 -->
                     <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
                         <div class="h-48 sm:h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1593011372393-5969399676b4?q=80&w=2070&auto=format&fit=crop" alt="Ashensor Premium" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
                         <div class="p-4 sm:p-6">
@@ -183,8 +113,6 @@
                             <span class="bg-srs-light-navy text-srs-cyan text-xs sm:text-sm font-medium px-3 py-1 rounded-full">Premium</span>
                         </div>
                     </div>
-                    
-                    <!-- Karta 2 -->
                     <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
                         <div class="h-48 sm:h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1616594418228-56582411b332?q=80&w=1974&auto=format&fit=crop" alt="Ashensor Rezidencial" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
                         <div class="p-4 sm:p-6">
@@ -193,8 +121,6 @@
                             <span class="bg-srs-light-navy text-srs-cyan text-xs sm:text-sm font-medium px-3 py-1 rounded-full">Rezidencial</span>
                         </div>
                     </div>
-                    
-                    <!-- Karta 3 -->
                     <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
                         <div class="h-48 sm:h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1560185012-34f4b46a0b9a?q=80&w=2070&auto=format&fit=crop" alt="Ashensor Komercial" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
                         <div class="p-4 sm:p-6">
@@ -207,32 +133,23 @@
             </div>
         </section>
 
-        <!-- ================================================== -->
-        <!-- SEKSIONI I SIGURISË (Faqja 3) -->
-        <!-- ================================================== -->
         <section class="bg-srs-navy">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-8 md:mb-12">
-                    <!-- Titulli i Seksionit -->
                     <h2 class="text-3xl sm:text-4xl font-bold text-srs-white mb-3">Projektuar për <span class="text-srs-cyan">Siguri pa Kompromis</span></h2>
-                    <!-- Nëntitulli i Seksionit -->
                     <p class="text-base sm:text-lg text-srs-slate max-w-2xl mx-auto">Angazhimi ynë për sigurinë tuaj është i integruar në çdo sistem që ne projektojmë.</p>
                 </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <!-- Veçoria 1 -->
                     <div class="p-4 sm:p-8">
                         <div class="w-16 h-16 sm:w-20 sm:h-20 bg-srs-light-navy rounded-full flex items-center justify-center mx-auto mb-4"><i data-feather="shield" class="text-srs-cyan w-8 h-8 sm:w-10 sm:h-10"></i></div>
                         <h3 class="text-lg sm:text-xl font-bold text-srs-white mb-2">Frenim Rezervë</h3>
                         <p class="text-sm sm:text-base text-srs-slate">Frena elektromagnetike të avancuara aktivizohen menjëherë në çdo skenar mbingarkese.</p>
                     </div>
-                    <!-- Veçoria 2 -->
                     <div class="p-4 sm:p-8">
                         <div class="w-16 h-16 sm:w-20 sm:h-20 bg-srs-light-navy rounded-full flex items-center justify-center mx-auto mb-4"><i data-feather="activity" class="text-srs-cyan w-8 h-8 sm:w-10 sm:h-10"></i></div>
                         <h3 class="text-lg sm:text-xl font-bold text-srs-white mb-2">Monitorim në Distancë 24/7</h3>
                         <p class="text-sm sm:text-base text-srs-slate">Sistemet tona raportojnë diagnostikime në kohë reale për mirëmbajtje proaktive.</p>
                     </div>
-                    <!-- Veçoria 3 -->
                     <div class="p-4 sm:p-8">
                         <div class="w-16 h-16 sm:w-20 sm:h-20 bg-srs-light-navy rounded-full flex items-center justify-center mx-auto mb-4"><i data-feather="battery-charging" class="text-srs-cyan w-8 h-8 sm:w-10 sm:h-10"></i></div>
                         <h3 class="text-lg sm:text-xl font-bold text-srs-white mb-2">Furnizim Emergjence</h3>
@@ -242,22 +159,15 @@
             </div>
         </section>
 
-        <!-- ================================================== -->
-        <!-- SEKSIONI I KONTAKTIT (Faqja 4) -->
-        <!-- ================================================== -->
         <section id="contact" class="bg-srs-light-navy">
             <div class="container mx-auto px-4 text-center">
-                <!-- Titulli i Seksionit -->
                 <h2 class="text-3xl sm:text-4xl font-bold text-srs-white mb-3">Filloni Ngjitjen Tuaj</h2>
-                <!-- Nëntitulli i Seksionit -->
                 <p class="text-lg sm:text-xl text-srs-cyan mb-8 max-w-2xl mx-auto">Gati për të ngritur në nivel projektin tuaj? Kontaktoni ekipin tonë për një konsultim.</p>
-                <!-- Teksti i Butonit -->
                 <button class="elevator-btn primary px-10 py-3 sm:px-12 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Na Kontaktoni</button>
             </div>
         </section>
     </div>
 
-    <!-- Dyert dhe Treguesi i Kateve - Nuk ka tekst për të modifikuar këtu -->
     <div class="door left-door"></div>
     <div class="door right-door"></div>
     <div id="floor-indicator" class="fixed top-1/2 -translate-y-1/2 right-4 md:right-8 flex flex-col items-center z-40 space-y-4">
@@ -275,7 +185,6 @@
 
             const sections = gsap.utils.toArray('section');
             const floorButtons = gsap.utils.toArray('.floor-indicator');
-            const isMobile = window.innerWidth <= 768;
             let activeIndex = 0;
             let isAnimating = false;
 
@@ -290,19 +199,15 @@
                 if (activeIndex !== index) {
                     activeIndex = index;
                     updateActiveFloor(activeIndex);
-                    if (!isMobile) {
-                        closeDoors();
-                    }
+                    closeDoors();
                 }
 
-                const target = isMobile ? sections[index] : index * window.innerHeight;
-                
-                gsap.to(isMobile ? '#master-wrapper' : window, {
-                    scrollTo: { y: target, autoKill: false },
-                    duration: isMobile ? 1 : 1.5,
+                gsap.to(window, {
+                    scrollTo: { y: index * window.innerHeight, autoKill: false },
+                    duration: 1.5,
                     ease: 'power3.inOut',
                     onComplete: () => {
-                        if (!isMobile && !document.body.classList.contains('doors-open')) {
+                        if (!document.body.classList.contains('doors-open')) {
                             openDoors();
                         }
                         setTimeout(() => isAnimating = false, 300);
@@ -314,7 +219,7 @@
                     { opacity: 0, y: 50 },
                     { 
                         opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1,
-                        delay: (document.body.classList.contains('doors-open') || isMobile) ? 0.1 : 1.2
+                        delay: document.body.classList.contains('doors-open') ? 0.1 : 1.2
                     }
                 );
             }
@@ -331,56 +236,30 @@
                 btn.addEventListener("click", () => goToSection(index));
             });
 
-            if (!isMobile) {
-                Observer.create({
-                    target: window,
-                    type: "wheel,touch,pointer",
-                    onDown: () => goToSection(activeIndex + 1),
-                    onUp: () => goToSection(activeIndex - 1),
-                    tolerance: 10,
-                    preventDefault: true
-                });
-            } else {
-                // Mobile scroll snap behavior
-                const wrapper = document.getElementById('master-wrapper');
-                let scrollTimeout;
-                
-                wrapper.addEventListener('scroll', () => {
-                    clearTimeout(scrollTimeout);
-                    scrollTimeout = setTimeout(() => {
-                        const scrollPosition = wrapper.scrollTop;
-                        const viewportHeight = window.innerHeight;
-                        const newIndex = Math.round(scrollPosition / viewportHeight);
-                        
-                        if (newIndex !== activeIndex && newIndex >= 0 && newIndex < sections.length) {
-                            activeIndex = newIndex;
-                            updateActiveFloor(activeIndex);
-                        }
-                    }, 150);
-                });
-            }
+            Observer.create({
+                target: window,
+                type: "wheel,touch,pointer",
+                onDown: () => goToSection(activeIndex + 1),
+                onUp: () => goToSection(activeIndex - 1),
+                tolerance: 10,
+                preventDefault: true
+            });
             
             function initialize() {
-                if (!isMobile) {
-                    gsap.set('body', { overflow: 'hidden' });
-                    gsap.set(window, { scrollTo: 0 });
-                }
+                gsap.set('body', { overflow: 'hidden' });
+                gsap.set(window, { scrollTo: 0 });
                 updateActiveFloor(0);
-                setTimeout(() => {
-                    if (!isMobile) openDoors();
-                }, 500);
+                setTimeout(openDoors, 500);
                 
                 const elements = sections[0].querySelectorAll("h1, h2, p, .grid, button");
                 gsap.fromTo(elements, 
                     { opacity: 0, y: 50 }, 
-                    { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1, delay: isMobile ? 0.3 : 1 }
+                    { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1, delay: 1 }
                 );
             }
 
             window.addEventListener('resize', () => {
-                if (!isMobile) {
-                    gsap.to(window, {scrollTo: activeIndex * window.innerHeight, duration: 0});
-                }
+                gsap.to(window, {scrollTo: activeIndex * window.innerHeight, duration: 0});
             });
 
             initialize();
