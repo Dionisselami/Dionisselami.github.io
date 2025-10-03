@@ -31,7 +31,7 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #0A192F;
             color: #8892B0;
-            overflow: hidden; /* Kritike për lëvizjen me faqe */
+            overflow: hidden;
             margin: 0;
             padding: 0;
         }
@@ -78,11 +78,96 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 1rem; /* Hapësirë anësore për celular */
+            padding: 0 1rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 47, 0.95);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background-color: #112240;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(100, 255, 218, 0.1);
+            border: 1px solid #64FFDA;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background-color: #0A192F;
+            border: 1px solid #8892B0;
+            border-radius: 5px;
+            color: #E6F1FF;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #64FFDA;
+        }
+        .close-modal {
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #64FFDA;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close-modal:hover {
+            color: #E6F1FF;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #64FFDA;
+            color: #0A192F;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            z-index: 3000;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.3);
+        }
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body class="bg-srs-navy">
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message">✓ Mesazhi u dërgua me sukses!</div>
+
     <!-- Mbështjellësi për të gjitha seksionet -->
     <div id="master-wrapper">
 
@@ -100,9 +185,9 @@
                 
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <!-- Teksti i Butonit Primar -->
-                    <button class="elevator-btn primary px-6 py-3 sm:px-8 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Zgjidhjet Tona</button>
+                    <button id="solutionsBtn" class="elevator-btn primary px-6 py-3 sm:px-8 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Zgjidhjet Tona</button>
                     <!-- Teksti i Butonit Sekondar -->
-                    <button class="elevator-btn px-6 py-3 sm:px-8 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Kërko një Kuotë</button>
+                    <button id="quoteBtn" class="elevator-btn px-6 py-3 sm:px-8 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Kërko një Kuotë</button>
                 </div>
                 
                 <div class="mt-16 scroll-indicator">
@@ -126,7 +211,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <!-- Karta 1 -->
-                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
+                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2 cursor-pointer model-card" data-model="SkyLux Pro">
                         <div class="h-48 sm:h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1593011372393-5969399676b4?q=80&w=2070&auto=format&fit=crop" alt="Ashensor Premium" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
                         <div class="p-4 sm:p-6">
                             <h3 class="text-xl sm:text-2xl font-bold text-srs-white mb-2">SkyLux Pro</h3>
@@ -136,7 +221,7 @@
                     </div>
                     
                     <!-- Karta 2 -->
-                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
+                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2 cursor-pointer model-card" data-model="HomeGlide">
                         <div class="h-48 sm:h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1616594418228-56582411b332?q=80&w=1974&auto=format&fit=crop" alt="Ashensor Rezidencial" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
                         <div class="p-4 sm:p-6">
                             <h3 class="text-xl sm:text-2xl font-bold text-srs-white mb-2">HomeGlide</h3>
@@ -146,7 +231,7 @@
                     </div>
                     
                     <!-- Karta 3 -->
-                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2">
+                    <div class="bg-srs-navy rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-500 hover:-translate-y-2 cursor-pointer model-card" data-model="TitanFlow">
                         <div class="h-48 sm:h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1560185012-34f4b46a0b9a?q=80&w=2070&auto=format&fit=crop" alt="Ashensor Komercial" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"></div>
                         <div class="p-4 sm:p-6">
                             <h3 class="text-xl sm:text-2xl font-bold text-srs-white mb-2">TitanFlow</h3>
@@ -203,12 +288,55 @@
                 <!-- Nëntitulli i Seksionit -->
                 <p class="text-lg sm:text-xl text-srs-cyan mb-8 max-w-2xl mx-auto">Gati për të ngritur në nivel projektin tuaj? Kontaktoni ekipin tonë për një konsultim.</p>
                 <!-- Teksti i Butonit -->
-                <button class="elevator-btn primary px-10 py-3 sm:px-12 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Na Kontaktoni</button>
+                <button id="contactBtn" class="elevator-btn primary px-10 py-3 sm:px-12 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-lg transform transition-all duration-300 hover:scale-105">Na Kontaktoni</button>
             </div>
         </section>
     </div>
 
-    <!-- Dyert dhe Treguesi i Kateve - Nuk ka tekst për të modifikuar këtu -->
+    <!-- Modal për Kuotë -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="quoteModal">&times;</span>
+            <h2 class="text-2xl font-bold text-srs-white mb-4">Kërko një Kuotë</h2>
+            <form id="quoteForm">
+                <input type="text" name="name" class="form-input" placeholder="Emri dhe Mbiemri *" required>
+                <input type="email" name="email" class="form-input" placeholder="Email *" required>
+                <input type="tel" name="phone" class="form-input" placeholder="Telefoni *" required>
+                <select name="model" class="form-input" required>
+                    <option value="">Zgjidhni Modelin *</option>
+                    <option value="SkyLux Pro">SkyLux Pro - Premium</option>
+                    <option value="HomeGlide">HomeGlide - Rezidencial</option>
+                    <option value="TitanFlow">TitanFlow - Komercial</option>
+                </select>
+                <textarea name="message" class="form-input" rows="4" placeholder="Detaje shtesë për projektin tuaj..."></textarea>
+                <button type="submit" class="elevator-btn primary w-full py-3 rounded-md font-medium">Dërgo Kërkesën</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal për Kontakt -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal="contactModal">&times;</span>
+            <h2 class="text-2xl font-bold text-srs-white mb-4">Na Kontaktoni</h2>
+            <form id="contactForm">
+                <input type="text" name="name" class="form-input" placeholder="Emri dhe Mbiemri *" required>
+                <input type="email" name="email" class="form-input" placeholder="Email *" required>
+                <input type="tel" name="phone" class="form-input" placeholder="Telefoni">
+                <select name="subject" class="form-input" required>
+                    <option value="">Zgjidhni Temën *</option>
+                    <option value="Informacion të Përgjithshëm">Informacion të Përgjithshëm</option>
+                    <option value="Suport Teknik">Suport Teknik</option>
+                    <option value="Mirëmbajtje">Mirëmbajtje</option>
+                    <option value="Projekt i Ri">Projekt i Ri</option>
+                </select>
+                <textarea name="message" class="form-input" rows="5" placeholder="Mesazhi juaj *" required></textarea>
+                <button type="submit" class="elevator-btn primary w-full py-3 rounded-md font-medium">Dërgo Mesazhin</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dyert dhe Treguesi i Kateve -->
     <div class="door left-door"></div>
     <div class="door right-door"></div>
     <div id="floor-indicator" class="fixed top-1/2 -translate-y-1/2 right-4 md:right-8 flex flex-col items-center z-40 space-y-4">
@@ -304,6 +432,127 @@
             });
 
             initialize();
+
+            // ===== FUNCTIONAL FEATURES =====
+
+            // Button Navigation
+            document.getElementById('solutionsBtn').addEventListener('click', () => goToSection(1));
+            document.getElementById('quoteBtn').addEventListener('click', () => openModal('quoteModal'));
+            document.getElementById('contactBtn').addEventListener('click', () => openModal('contactModal'));
+
+            // Model Cards - Click to open quote modal with pre-selected model
+            document.querySelectorAll('.model-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const modelName = this.getAttribute('data-model');
+                    openModal('quoteModal');
+                    document.querySelector('#quoteForm select[name="model"]').value = modelName;
+                });
+            });
+
+            // Modal Functions
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+                document.body.style.overflow = 'hidden'; // Keep overflow hidden for elevator effect
+            }
+
+            // Close modal buttons
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    closeModal(this.getAttribute('data-modal'));
+                });
+            });
+
+            // Close modal on outside click
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeModal(this.id);
+                    }
+                });
+            });
+
+            // Success Message Function
+            function showSuccessMessage(message = '✓ Mesazhi u dërgua me sukses!') {
+                const successMsg = document.getElementById('successMessage');
+                successMsg.textContent = message;
+                successMsg.classList.add('show');
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 4000);
+            }
+
+            // Quote Form Submission
+            document.getElementById('quoteForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                
+                // Simulate form submission
+                console.log('Quote Form Data:', data);
+                
+                // In real implementation, you would send this to your server:
+                // fetch('/api/quote', { method: 'POST', body: JSON.stringify(data) })
+                
+                closeModal('quoteModal');
+                showSuccessMessage('✓ Kërkesa për kuotë u dërgua me sukses! Do të kontaktohemi së shpejti.');
+                this.reset();
+            });
+
+            // Contact Form Submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                
+                // Simulate form submission
+                console.log('Contact Form Data:', data);
+                
+                // In real implementation, you would send this to your server:
+                // fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
+                
+                closeModal('contactModal');
+                showSuccessMessage('✓ Mesazhi u dërgua me sukses! Faleminderit për kontaktin.');
+                this.reset();
+            });
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', function(e) {
+                // Check if modal is open
+                const isModalOpen = document.querySelector('.modal.active');
+                
+                if (!isModalOpen) {
+                    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                        e.preventDefault();
+                        goToSection(activeIndex + 1);
+                    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                        e.preventDefault();
+                        goToSection(activeIndex - 1);
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        goToSection(0);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        goToSection(sections.length - 1);
+                    }
+                } else {
+                    // Close modal on Escape
+                    if (e.key === 'Escape') {
+                        document.querySelectorAll('.modal.active').forEach(modal => {
+                            closeModal(modal.id);
+                        });
+                    }
+                }
+            });
+
+            // Scroll indicator click
+            document.querySelector('.scroll-indicator').addEventListener('click', () => goToSection(1));
         });
     </script>
 </body>
